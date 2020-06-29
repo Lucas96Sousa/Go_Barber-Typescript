@@ -1,4 +1,0 @@
-#Sun Jun 28 20:47:29 BRT 2020
-base.0=/home/liuca/Área de Trabalho/Go_Barber-Typescript/appgobarber/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
