@@ -8,12 +8,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './routes';
 
-if (__DEV__) {
-  import('../ReactotronConfig').then(() =>
-    console.log('Reactotron Configured')
-  );
-}
-
 const App: React.FC = () => (
   <NavigationContainer>
     <StatusBar barStyle="light-content" backgroundColor="#312e38" />
