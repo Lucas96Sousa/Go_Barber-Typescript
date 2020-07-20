@@ -8,13 +8,13 @@ import 'express-async-errors';
 import routes from './routes';
 
 // CONFIG
-import uploadConfig from './config/upload';
+import uploadConfig from '../../../config/upload';
 
 // DATABASE
-import './database';
+import '../Typeorm';
 
 // ERROR
-import AppError from './errors/AppError';
+import AppError from '../../errors/AppError';
 
 const app = express();
 
