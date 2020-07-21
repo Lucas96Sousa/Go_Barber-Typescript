@@ -2,10 +2,10 @@ import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
 // MODEL
-import User from '../models/User';
+import User from '@modules/users/infra/Typeorm/entities/User';
 
 // ERROR
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 interface Request {
   name: string;

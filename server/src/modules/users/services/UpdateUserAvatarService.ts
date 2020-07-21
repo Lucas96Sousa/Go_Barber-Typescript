@@ -3,13 +3,13 @@ import path from 'path';
 import fs from 'fs';
 
 // Models
-import User from '../models/User';
+import User from '@modules/users/infra/Typeorm/entities/User';
 
 // Config
-import uploadConfig from '../config/upload';
+import uploadConfig from '@config/upload';
 
 // ERROR
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 // Interfaces
 interface Request {
