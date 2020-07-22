@@ -1,9 +1,9 @@
-import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
+import { injectable, inject } from 'tsyringe';
 
 // Models
-import User from '@modules/users/infra/Typeorm/entities/User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 // Config
 import uploadConfig from '@config/upload';
@@ -11,19 +11,23 @@ import uploadConfig from '@config/upload';
 // ERROR
 import AppError from '@shared/errors/AppError';
 
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 // Interfaces
-interface Request {
+interface IRequest {
   user_id: string;
   avatarFilename: string;
 }
 
 // Class
-
+@injectable()
 export default class UpadteUserAvatarService {
-  public async execute({ user_id, avatarFilename }: Request): Promise<User> {
-    const usersRepository = getRepository(User);
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+  ) {}
 
-    const user = await usersRepository.findOne(user_id);
+  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError(
@@ -44,7 +48,7 @@ export default class UpadteUserAvatarService {
     }
     user.avatar = avatarFilename;
 
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }
