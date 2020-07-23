@@ -1,4 +1,3 @@
-import { hash } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
 
 // MODEL
@@ -9,6 +8,7 @@ import AppError from '@shared/errors/AppError';
 
 // INTEFACE
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IHashedProvider from '../providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
   name: string;
@@ -20,6 +20,9 @@ export default class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashedProvider,
   ) {}
 
   public async execute({ name, email, password }: IRequest): Promise<User> {
@@ -29,7 +32,7 @@ export default class CreateUserService {
       throw new AppError('O email já está sendo usado', 400);
     }
 
-    const hashedPassword = await hash(password, 8);
+    const hashedPassword = await this.hashProvider.generateHash(password);
 
     const user = await this.usersRepository.create({
       name,
