@@ -6,38 +6,38 @@ import AppError from '@shared/errors/AppError';
 import authConfig from '@config/auth';
 
 interface ITokenPayload {
-  iat: number;
-  exp: number;
-  sub: string;
+    iat: number;
+    exp: number;
+    sub: string;
 }
 
 export default function ensureAuthenticated(
-  req: Request,
-  res: Response,
-  next: NextFunction,
+    req: Request,
+    res: Response,
+    next: NextFunction,
 ): void {
-  // validação do jwt
-  const authHeader = req.headers.authorization;
+    // validação do jwt
+    const authHeader = req.headers.authorization;
 
-  if (!authHeader) {
-    throw new AppError('Token não encontrado', 401);
-  }
+    if (!authHeader) {
+        throw new AppError('Token não encontrado', 401);
+    }
 
-  // Bearear auth
+    // Bearear auth
 
-  const [, token] = authHeader.split(' ');
+    const [, token] = authHeader.split(' ');
 
-  try {
-    const decoded = verify(token, authConfig.jwt.secret);
+    try {
+        const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub } = decoded as ITokenPayload;
+        const { sub } = decoded as ITokenPayload;
 
-    req.user = {
-      id: sub,
-    };
+        req.user = {
+            id: sub,
+        };
 
-    return next();
-  } catch {
-    throw new AppError('Token inválido', 401);
-  }
+        return next();
+    } catch {
+        throw new AppError('Token inválido', 401);
+    }
 }
