@@ -10,16 +10,16 @@ import IMailTemplateProvider from './MailTemplateProvider/models/IMailTemplatePr
 import HandlebarsMailTemplateProvider from './MailTemplateProvider/implementations/HandlebarsMailTemplateProvider';
 
 container.registerSingleton<IStorageProvider>(
-  'StorageProvider',
-  DiskStorageProvider,
+    'StorageProvider',
+    DiskStorageProvider,
 );
 
 container.registerSingleton<IMailTemplateProvider>(
-  'MailTemplateProvider',
-  HandlebarsMailTemplateProvider,
+    'MailTemplateProvider',
+    HandlebarsMailTemplateProvider,
 );
 
 container.registerInstance<IMailProvider>(
-  'MailProvider',
-  container.resolve(EtherealMailProvider),
+    'MailProvider',
+    container.resolve(EtherealMailProvider),
 );
