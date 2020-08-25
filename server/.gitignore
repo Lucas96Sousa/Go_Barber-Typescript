@@ -1,5 +1,5 @@
 .idea/
-ormconfig.json
+server/ormconfig.json
 build/
 temp/
 node_modules/
