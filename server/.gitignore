@@ -1,9 +1,9 @@
 .idea/
+ormconfig.json
 build/
 temp/
 node_modules/
 .vscode/
-ormconfig.json
 coverage
 .env
 tmp/*
